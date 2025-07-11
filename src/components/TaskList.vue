@@ -9,10 +9,13 @@
 
   <div class="task-list">
 
-    <div v-for="task in tasks" :key="task.id" class="task-item">
+    <div v-if="tasks.length > 0" v-for="task in tasks" :key="task.id" class="task-item">
       <label> <input type="checkbox" :checked="task.done" disabled /> <strong>{{ task.title }}</strong> </label>
       <p>{{ task.description }}</p>
+    </div>
 
+    <div v-else class="empty-tasks">
+      <h3>Adicione Novas Tarefas</h3>
     </div>
 
   </div>
@@ -60,5 +63,9 @@
   .task-item p {
     margin-top: 0.5rem;
     color: var(--color-text);
+  }
+
+  .empty-tasks {
+    text-align: center;
   }
 </style>
