@@ -1,21 +1,56 @@
 <script setup lang="ts">
-  // defineProps<{
-  //   msg: string
-  // }>()
+  import { ref } from 'vue'
+  import { useTaskStore, type Task } from '@/stores/tasks'
+
+  const taskStore = useTaskStore()
+
+  const title = ref('')
+  const description = ref('')
+
+  function handleAddTask(event: Event) {
+    event.preventDefault()
+
+    if (!title.value.trim() || !description.value.trim()) {
+      alert('Por favor preencha os campos corretamente')
+      return
+    }
+
+    const newTask: Omit<Task, 'id'> = {
+      title: title.value,
+      description: description.value,
+      done: false,
+    }
+
+    taskStore.addTask(newTask)
+
+    title.value = ''
+    description.value = ''
+  }
 </script>
 
 <template>
+
   <div class="new-task">
+
     <h3>Adicionar Tarefa</h3>
-    <form>
-      <input placeholder="Título" type="text" />
-      <textarea rows="4" placeholder="Descrição"></textarea>
+
+    <form @submit="handleAddTask">
+      <input v-model="title" placeholder="Título" type="text" name="title" /> <textarea v-model="description" rows="4"
+        placeholder="Descrição" name="description"></textarea>
       <div class="actions">
-        <button type="submit" class="btn primary">Adicionar</button>
-        <button type="button" class="btn secondary">Cancelar</button>
+        <button type="submit" class="btn primary">Adicionar</button> <button type="button" class="btn secondary" @click="
+          () => {
+            title = ''
+            description = ''
+          }
+        ">
+          Cancelar </button>
       </div>
+
     </form>
+
   </div>
+
 </template>
 
 <style scoped lang="scss">
@@ -24,8 +59,6 @@
     flex-direction: column;
     gap: 1rem;
     width: 100%;
-    max-width: 500px;
-    margin-top: 2rem;
     padding: 1rem 1.5rem;
     background-color: var(--color-background-soft);
     border-radius: 12px;

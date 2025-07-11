@@ -1,34 +1,41 @@
 <script setup lang="ts">
-  type Task = {
-    id: number
-    title: string
-    description: string
-    done: boolean
-  }
+  import { useTaskStore } from '@/stores/tasks'
 
-  defineProps<{
-    tasks: Task[]
-  }>()
+  const taskStore = useTaskStore()
+  const tasks = taskStore.filteredTasks
 </script>
 
 <template>
+
   <div class="task-list">
+
     <div v-for="task in tasks" :key="task.id" class="task-item">
-      <label>
-        <input type="checkbox" :checked="task.done" disabled />
-        <strong>{{ task.title }}</strong>
-      </label>
+      <label> <input type="checkbox" :checked="task.done" disabled /> <strong>{{ task.title }}</strong> </label>
       <p>{{ task.description }}</p>
+
     </div>
+
   </div>
+
 </template>
 
-<style scoped>
+<style scoped lang="scss">
   .task-list {
     display: flex;
     flex-direction: column;
-    width: 100%;
     gap: 1rem;
+    padding-right: 0.25rem;
+    overflow-y: auto;
+    max-height: 100%;
+  }
+
+  .task-list::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .task-list::-webkit-scrollbar-thumb {
+    background-color: var(--color-border-hover);
+    border-radius: 4px;
   }
 
   .task-item {
@@ -38,6 +45,9 @@
     background-color: var(--color-background-soft);
     color: var(--color-text);
     transition: background-color 0.3s ease;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
   }
 
   .task-item label {

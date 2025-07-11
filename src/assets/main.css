@@ -5,14 +5,17 @@ body,
 #app {
   height: 100%;
   margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 #app {
   font-weight: normal;
-  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Estilos de links */
 a,
 .green {
   text-decoration: none;
@@ -37,6 +40,5 @@ a,
   #app {
     max-width: 1280px;
     width: 100%;
-    padding: 1rem;
   }
 }
