@@ -2,14 +2,14 @@
   import { useTaskStore } from '@/stores/tasks'
 
   const taskStore = useTaskStore()
-  const tasks = taskStore.filteredTasks
 </script>
 
 <template>
 
   <div class="task-list">
 
-    <div v-if="tasks.length > 0" v-for="task in tasks" :key="task.id" class="task-item">
+    <div v-if="taskStore.filteredTasks.length > 0" v-for="task in taskStore.filteredTasks" :key="task.id"
+      class="task-item">
       <label> <input type="checkbox" :checked="task.done" disabled /> <strong>{{ task.title }}</strong> </label>
       <p>{{ task.description }}</p>
     </div>
