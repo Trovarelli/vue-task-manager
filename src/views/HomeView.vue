@@ -1,45 +1,67 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import NewTask from '@/components/NewTask.vue'
-import TaskList from '@/components/TaskList.vue'
+  import { ref } from 'vue'
+  import NewTask from '@/components/NewTask.vue'
+  import TaskList from '@/components/TaskList.vue'
 
-const filter = ref<'pending' | 'completed' | null>(null)
+  const filter = ref<'pending' | 'completed' | null>(null)
 
-function setFilter(value: typeof filter.value) {
-  filter.value = value
-}
+  function setFilter(value: typeof filter.value) {
+    filter.value = value
+  }
+
+  const tasks = [
+    {
+      id: 1,
+      title: 'Comprar mantimentos',
+      description: 'Leite, pão, ovos e frutas',
+      done: false,
+    },
+    {
+      id: 2,
+      title: 'Estudar Vue.js',
+      description: 'Focar no Composition API e diretivas',
+      done: true,
+    },
+    {
+      id: 3,
+      title: 'Fazer exercícios',
+      description: '30 minutos de caminhada',
+      done: false,
+    },
+    {
+      id: 4,
+      title: 'Enviar relatório',
+      description: 'Relatório semanal para o gerente',
+      done: true,
+    },
+  ]
+
 </script>
 
 <template>
-
   <main>
-
     <header>
-
       <h1>Lista de Tarefas</h1>
-
     </header>
-
-    <div class="filter-container">
-       <span>Filtrar por Estado: </span>
-      <div>
-         <button :class="{ active: filter === 'pending' }" @click="setFilter('pending')">
-           Pendentes </button
-        > <button :class="{ active: filter === 'completed' }" @click="setFilter('completed')">
-           Completas </button
-        > <button class="filter-cleaner" @click="setFilter(null)"> Limpar Filtros </button>
+    <section>
+      <div class="filter-container">
+        <span>Filtrar por Estado: </span>
+        <div>
+          <button :class="{ active: filter === 'pending' }" @click="setFilter('pending')">
+            Pendentes </button> <button :class="{ active: filter === 'completed' }" @click="setFilter('completed')">
+            Completas </button> <button class="filter-cleaner" @click="setFilter(null)"> Limpar Filtros </button>
+        </div>
       </div>
-
-    </div>
-     <TaskList :tasks="[]" /> <NewTask />
+      <TaskList :tasks="tasks" />
+      <NewTask />
+    </section>
   </main>
 
 </template>
 
 <style scoped lang="scss">
-main {
+  main {
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
 
@@ -47,42 +69,46 @@ main {
       color: var(--color-heading);
     }
 
-    .filter-container {
-      display: flex;
-      gap: 1rem;
+    section {
+      max-width: 600px;
 
-      span {
-        margin-bottom: 0.5rem;
-      }
-
-      div {
+      .filter-container {
         display: flex;
-        gap: 0.5rem;
+        gap: 1rem;
+        margin-bottom: 1rem;
 
-        button {
-          background-color: transparent;
-          border: 1px solid var(--color-border);
-          color: var(--color-text);
-          padding: 0.5rem 1rem;
-          border-radius: 4px;
-          cursor: pointer;
-          transition: all 0.2s ease;
+        span {
+          margin-bottom: 0.5rem;
+        }
 
-          &.active {
-            background-color: var(--color-text);
-            color: var(--color-background);
-          }
+        div {
+          display: flex;
+          gap: 0.5rem;
 
-          &:hover {
-            border-color: var(--color-border-hover);
-          }
+          button {
+            background-color: transparent;
+            border: 1px solid var(--color-border);
+            color: var(--color-text);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
 
-          &.filter-cleaner {
-            border: none;
+            &.active {
+              background-color: var(--color-text);
+              color: var(--color-background);
+            }
+
+            &:hover {
+              border-color: var(--color-border-hover);
+            }
+
+            &.filter-cleaner {
+              border: none;
+            }
           }
         }
       }
     }
   }
 </style>
-

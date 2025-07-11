@@ -1,12 +1,14 @@
-<script setup lang="ts">
-import { RouterView } from 'vue-router'
-</script>
-
 <template>
-
-  <main><RouterView /></main>
-
+  <main>
+    <RouterView />
+  </main>
 </template>
 
-<style scoped></style>
-
+<style scoped>
+  main {
+    min-height: 100vh;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    transition: all 0.3s ease;
+  }
+</style>
