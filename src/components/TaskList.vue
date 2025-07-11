@@ -10,7 +10,8 @@
 
     <div v-if="taskStore.filteredTasks.length > 0" v-for="task in taskStore.filteredTasks" :key="task.id"
       class="task-item">
-      <label> <input type="checkbox" :checked="task.done" disabled /> <strong>{{ task.title }}</strong> </label>
+      <label> <input type="checkbox" @click="taskStore.toggleDone(task.id)" :checked="task.done" onclick="" />
+        <strong>{{ task.title }}</strong> </label>
       <p>{{ task.description }}</p>
     </div>
 
