@@ -44,8 +44,8 @@ main {
     flex-direction: column;
 
     h1 {
-        color: var(--color-heading);
-      }
+      color: var(--color-heading);
+    }
 
     .filter-container {
       display: flex;
@@ -77,7 +77,7 @@ main {
             border-color: var(--color-border-hover);
           }
 
-          &.filter-container {
+          &.filter-cleaner {
             border: none;
           }
         }
